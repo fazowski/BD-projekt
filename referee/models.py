@@ -84,6 +84,28 @@ class MatchCategory(models.Model):
         verbose_name_plural = 'Kategorie'
 
 
+class MatchStatus(models.Model):
+    """
+        Class representing Match Status model object
+    """
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Nazwa'
+    )
+    next_status = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name='Nastepny status'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Status meczu'
+        verbose_name_plural = 'Statusy meczy'
+
+
 class Match(models.Model):
     """
         Class representing Match model object
@@ -124,7 +146,6 @@ class Match(models.Model):
         related_name='referee_a',
         verbose_name='Sędzia A'
     )
-
     referee_b = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -132,6 +153,13 @@ class Match(models.Model):
         blank=True,
         related_name='referee_b',
         verbose_name='Sędzia B'
+    )
+    match_status = models.ForeignKey(
+        MatchStatus,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Status meczu'
     )
 
     def __str__(self):
@@ -143,22 +171,6 @@ class Match(models.Model):
         ordering = ('date_time',)
 
 
-class MatchStatus(models.Model):
-    """
-        Class representing Match Status model object
-    """
-    name = models.CharField(
-        max_length=100,
-        verbose_name='Nazwa'
-    )
-    next_status = models.IntegerField(
-        null=True,
-        blank=True,
-        verbose_name='Nastepny status'
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class MatchResult(models.Model):
