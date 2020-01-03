@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'index' %}">Strona Główna</a>
+            </li>
+            <li class="breadcrumb-item">Drużyny</li>
+            <li class="breadcrumb-item active">{{ team.name }}</li>
+          </ol>
+
+          <!-- DataTables Example -->
+          <div class="card mb-3 mt-5">
+            <div class="card-header">
+              <i class="fas fa-futbol"></i>
+              {{ team.name }}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ team.name }}</h5>
+              <table>
+                <tbody>
+                  <tr class="pt-2">
+                    <td class="pr-3"><strong>Miejscowość:</strong></td>
+                    <td>{{ team.city }}</td>
+                  </tr>
+                  <tr class="pt-2">
+                      <td class="pr-3"><strong>Telefon:</strong></td>
+                      <td>{{ team.telephone }}</td>
+                  </tr>
+                  <tr class="pt-3">
+                    <td class="pr-3"><strong>Email:</strong></td>
+                    <td>{{ team.emal }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+{% endblock %}

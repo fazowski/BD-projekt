@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 class RefereeDetails(models.Model):
@@ -61,6 +62,10 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular team instance."""
+        return reverse('team_detail', args=[str(self.id)])
 
     class Meta:
         verbose_name = 'Drużyna'

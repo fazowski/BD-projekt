@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card mb-3 mt-5">
+    <div class="card-header">
+      <i class="fas fa-trash-alt"></i>
+      Usuń drużynę
+    </div>
+    <div class="card-body">
+        <form method="POST">{% csrf_token %}
+            <p>Czy na pewno chcesz usunąć: <strong>{{ object.name }}</strong></p>
+            <input class="btn btn-sm btn-success" type="submit" value="Usuń" />
+        </form>
+    </div>
+</div>
+{% endblock %}
