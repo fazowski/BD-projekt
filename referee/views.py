@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
+
 from .models import Team
-
-
 from .models import Match
 
 
@@ -35,3 +35,32 @@ class TeamDetailView(LoginRequiredMixin, generic.DetailView):
     View class for team detail page
     """
     model = Team
+
+
+class TeamCreateView(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
+    """
+        View class for adding team
+    """
+    permission_required = 'teams.can_modify_team'
+    model = Team
+    fields = '__all__'
+    success_url = reverse_lazy('teams')
+
+
+class TeamUpdateView(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
+    """
+        View class for editing team
+    """
+    permission_required = 'teams.can_modify_team'
+    model = Team
+    fields = '__all__'
+    success_url = reverse_lazy('teams')
+
+
+class TeamDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
+    """
+        View class for deleting team
+    """
+    permission_required = 'teams.can_modify_team'
+    model = Team
+    success_url = reverse_lazy('teams')

@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card mb-3 mt-5">
+    <div class="card-header">
+      <i class="fas fa-plus"></i>
+      Dodaj drużynę
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+
+            <input class="btn btn-primary" type="submit" value="Zapisz" />
+        </form>
+    </div>
+</div>
+{% endblock %}

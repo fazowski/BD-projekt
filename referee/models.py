@@ -70,6 +70,7 @@ class Team(models.Model):
     class Meta:
         verbose_name = 'Drużyna'
         verbose_name_plural = 'Druzyny'
+        ordering = ('id',)
 
 
 class MatchCategory(models.Model):

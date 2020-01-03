@@ -16,7 +16,7 @@
             <div class="card-body">
               <div class="table-responsive">
                 {% if perms.teams.can_modify_team %}
-                  <a href="#" class="btn btn-sm btn-success">
+                  <a href="{% url 'team_add' %}" class="btn btn-sm btn-success">
                     <span class="fas fa-plus fa-sm"></span> Dodaj drużynę
                   </a>
                 <hr>
@@ -45,11 +45,11 @@
                       <td><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></td>
                       {% if perms.teams.can_modify_team %}
                       <td>
-                        <a href="#" class="btn btn-sm btn-secondary">
+                        <a href="{% url 'team_edit' team.id %}" class="btn btn-sm btn-secondary">
                           <span class="fas fa-pencil-alt fa-sm"></span>
                         </a>
 
-                        <a href="#" class="btn btn-sm btn-danger">
+                        <a href="{% url 'team_delete' team.id %}" class="btn btn-sm btn-danger">
                           <span class="fas fa-trash-alt fa-sm"></span>
                         </a>
                       </td>
