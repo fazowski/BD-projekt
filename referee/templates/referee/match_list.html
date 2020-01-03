@@ -1,0 +1,85 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  alert(message)
+{% endfor %}
+{% endif %}
+  <div class="card mb-3 mt-5">
+            <div class="card-header">
+              <i class="fas fa-trophy"></i>
+              Wszystkie mecze</div>
+            <div class="card-body">
+              {% if perms.matches.can_modify_match %}
+                  <a href="#" class="btn btn-sm btn-success">
+                    <span class="fas fa-plus fa-sm"></span> Dodaj mecz
+                  </a>
+              <hr>
+                {% endif %}
+              {% if match_list %}
+              <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+
+                    <tr>
+                      <th style="width: 25%">Gospodarz</th>
+                      <th style="width: 25%">Gość</th>
+                      <th>Data i Godzina</th>
+                      <th>Kategoria</th>
+                      <th>Sędziowie</th>
+                      {% if perms.matches.can_modify_match %}
+                      <th>Akcje</th>
+                      {% endif %}
+                    </tr>
+
+                  </thead>
+
+                  <tfoot>
+
+                    <tr>
+                      <th>Gospodarz</th>
+                      <th>Gość</th>
+                      <th>Data i Godzina</th>
+                      <th>Kategoria</th>
+                      <th>Sędziowie</th>
+                      {% if perms.matches.can_modify_match %}
+                      <th>Akcje</th>
+                      {% endif %}
+                    </tr>
+
+                  </tfoot>
+
+                  <tbody>
+                    {% for match in match_list %}
+                    <tr>
+                      <td>{{ match.home_team }}</td>
+                      <td>{{ match.away_team }}</td>
+                      <td>{{ match.date_time|date:'d-m-Y H:i' }}</td>
+                      <td><span class="badge badge-primary">{{ match.match_category }}</span></td>
+                      <td>{{ match.referee_a.last_name|default_if_none:"" }} - {{ match.referee_b.last_name|default_if_none:"" }}</td>
+                      {% if perms.matches.can_modify_match %}
+                      <td>
+                        <a href="#" class="btn btn-sm btn-secondary">
+                          <span class="fas fa-pencil-alt fa-sm"></span>
+                        </a>
+
+                        <a href="#" class="btn btn-sm btn-danger">
+                          <span class="fas fa-trash-alt fa-sm"></span>
+                        </a>
+                      </td>
+                      {% endif %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+  {% else %}
+  <p>Brak meczy</p>
+  </div>
+{% endif %}
+{% endblock %}

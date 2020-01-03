@@ -9,4 +9,6 @@ urlpatterns = [
     path('teams/edit/<int:pk>', views.TeamUpdateView.as_view(), name='team_edit'),
     path('teams/delete/<int:pk>', views.TeamDeleteView.as_view(), name='team_delete'),
     path('teams/details/<int:pk>', views.TeamDetailView.as_view(), name='team_detail'),
+    # Matches URLs
+    path('matches', views.MatchListView.as_view(), name='matches'),
 ]

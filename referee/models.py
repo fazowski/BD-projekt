@@ -177,8 +177,6 @@ class Match(models.Model):
         ordering = ('date_time',)
 
 
-
-
 class MatchResult(models.Model):
     match = models.ForeignKey(
         Match,

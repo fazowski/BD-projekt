@@ -3,9 +3,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 
-from .models import Team
-from .models import Match
-
+from .models import Team, Match
 
 class ManagerIndexView(LoginRequiredMixin, generic.ListView):
     """
@@ -16,11 +14,11 @@ class ManagerIndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'match_list'
     queryset = Match.objects.all()
 
-"""
-    TEAMS
-"""
-
-
+###########################################################
+#
+# Teams Views
+#
+##########################################################
 class TeamListView(LoginRequiredMixin, generic.ListView):
     """
     View class for team list
@@ -64,3 +62,17 @@ class TeamDeleteView(LoginRequiredMixin, PermissionRequiredMixin, generic.Delete
     permission_required = 'teams.can_modify_team'
     model = Team
     success_url = reverse_lazy('teams')
+
+
+###########################################################
+#
+# Matches Views
+#
+###########################################################
+class MatchListView(LoginRequiredMixin, generic.ListView):
+    """
+    View class for team list
+    """
+    model = Match
+    context_object_name = 'match_list'
+    queryset = Match.objects.all()
