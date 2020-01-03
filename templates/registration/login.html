@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+    <div class="alert alert-danger">
+        Podano nieprawidłowe dane. Proszę spróbować ponownie
+    </div>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <div class="alert alert-danger">
+            Nie masz dostępu do tej strony. Aby przejść dalej, zaloguj się
+        </div>
+    {% else %}
+        <div class="alert alert-primary">
+            Zaloguj się aby zobaczyć tą stronę
+        </div>
+    {% endif %}
+{% endif %}
+
+<div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+          <form method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+            <div class="form-group">
+              <div class="form-label-group">
+                  <input type="text" id="username" name="username" class="form-control" placeholder="Nazwa użytkownika" required="required" autofocus="autofocus">
+                  <label for="username">Nazwa użytkownika</labe>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Hasło" required="required">
+                    <label for="password">Hasło</label>
+              </div>
+            </div>
+
+              <input type="submit" value="Zaloguj" class="btn btn-primary btn-block"/>
+              <input type="hidden" name="next" value="{{ next }}">
+          </form>
+          <div class="text-center">
+            <!--a class="d-block small" href="forgot-password.html">Forgot Password?</a>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
