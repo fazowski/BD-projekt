@@ -19,3 +19,20 @@ returns trigger as
     $BODY$
 
 language plpgsql volatile;
+
+create trigger t_set_new_status after insert on referee_match
+    for each row
+    execute procedure f_set_new_status();
+
+create or replace function f_set_new_status()
+returns trigger as
+    $BODY$
+    BEGIN
+        if new.match_status_id isnull then
+            update referee_match set match_status_id = 1 where id = new.id;
+        end if;
+
+        return new;
+    end;
+    $BODY$
+language plpgsql volatile;
