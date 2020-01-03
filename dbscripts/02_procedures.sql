@@ -1,14 +1,11 @@
 -- 1. Pokazywanie drużyn z danego miasta
-create or replace function f_show_teams_from_city(city varchar)
+create or replace function f_show_teams_from_city(t_city varchar)
 returns setof referee_team
     language sql
     as
     $$
-        select * from referee_team rt where rt.city = city;
+        select * from referee_team rt where rt.city = t_city;
     $$;
-
-
-select * from f_show_teams_from_city(city := 'Poznań');
 
 -- 2. Wyświetlanie sędziów z danego miasta
 create or replace function f_show_ref_from_city(r_city varchar)
