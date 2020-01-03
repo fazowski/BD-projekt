@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="card mb-3 mt-5">
+    <div class="card-header">
+      {{ match.match_number }}: {{ match.home_team }} - {{ match.away_team }} <span class="badge badge-primary">{{ match.match_status }}</span>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary">Zmień status</button>
+        {% if match.match_status == "Rozegrany" %}
+        <button type="button" class="btn btn-success">Wprowadź wynik</button>
+        {% endif %}
+        <hr>
+        <p><strong>Numer meczu:</strong> {{ match.match_number }}</p>
+        <p><strong>Gospodarz:</strong> {{ match.home_team }}</p>
+        <p><strong>Gość:</strong> {{ match.away_team }}</p>
+        <p><strong>Data i godzina:</strong> {{ match.date_time }}</p>
+        <p><strong>Kategoria:</strong> {{ match.match_category }}</p>
+        <p><strong>Sędziowie:</strong> {{ match.referee_a }} - {{ match.referee_b }}</p>
+        <p><strong>Wynik:</strong> {{ match.home_team_goals }} - {{ match.away_team_goals }}</p>
+        <p><strong>Zwycięzca:</strong> {{ match.match_winner }}</p>
+        <p><strong>Status meczu:</strong> {{ match.match_status }}</p>
+
+    </div>
+</div>
+{% endblock %}

@@ -11,4 +11,5 @@ urlpatterns = [
     path('teams/details/<int:pk>', views.TeamDetailView.as_view(), name='team_detail'),
     # Matches URLs
     path('matches', views.MatchListView.as_view(), name='matches'),
+    path('matches/<int:match_id>', views.match_details_view, name='detail'),
 ]

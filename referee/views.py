@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
+from django.db import connection
 
 from .models import Team, Match
 
@@ -76,3 +77,16 @@ class MatchListView(LoginRequiredMixin, generic.ListView):
     model = Match
     context_object_name = 'match_list'
     queryset = Match.objects.all()
+
+def match_details_view(request, match_id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM V_MATCH_DETAILS WHERE MATCH_ID = {0}".format(match_id))
+        row = cursor.fetchone()
+
+        columns = [col[0] for col in cursor.description]
+        # print(dict(zip(columns, row)))
+        context = {
+            'match': dict(zip(columns, row))
+        }
+
+        return render(request, 'referee/match_detail.html', context)
