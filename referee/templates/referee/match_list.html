@@ -61,7 +61,7 @@
                       <td>{{ match.referee_a.last_name|default_if_none:"" }} - {{ match.referee_b.last_name|default_if_none:"" }}</td>
                       {% if perms.matches.can_modify_match %}
                       <td>
-                        <a href="#" class="btn btn-sm btn-secondary">
+                        <a href="{% url 'detail' match.id %}" class="btn btn-sm btn-secondary">
                           <span class="fas fa-pencil-alt fa-sm"></span> Szczegóły
                         </a>
                       </td>
