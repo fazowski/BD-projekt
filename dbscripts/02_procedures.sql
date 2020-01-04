@@ -34,10 +34,21 @@ as
         select * from v_match_details vmd where vmd.away_team = f_team;
     $$;
 
+-- 5. Zmiana statusu meczu
+create or replace procedure f_change_match_status(f_match_id integer)
+language plpgsql
+as
+    $$
+    BEGIN
+        update
+            referee_match
+        set
+            match_status_id = (
+                select next_status from referee_matchstatus where id = (select match_status_id from referee_match where id = f_match_id)
+                )
+        where
+        id = f_match_id;
 
--- create or replace procedure p_change_match_status()
--- language sql
--- as
---     $$
---
---     $$;
+        commit;
+    end;
+    $$;
