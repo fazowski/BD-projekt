@@ -78,6 +78,7 @@ class MatchListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'match_list'
     queryset = Match.objects.all()
 
+
 def match_details_view(request, match_id):
     with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM V_MATCH_DETAILS WHERE MATCH_ID = {0}".format(match_id))
