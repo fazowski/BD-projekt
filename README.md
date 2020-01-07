@@ -5,4 +5,4 @@ ręcznej. Zadaniami do wykonania są zaprojektowanie bazy danych, implementacja 
 aplikacji po stronie bazy danych oraz stworzenie prostego interfejsu dla użytkownika, który
 będzie umożliwiał wykorzystanie funkcji stworzonych po stronie bazy danych.
 
-Dokumentacja dostępna w pliku "Raport.pdf"
+Dokumentacja dostępna w pliku ["Raport.pdf"](Raport.pdf)
